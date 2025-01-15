@@ -29,6 +29,13 @@ form select {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+form input.error,
+form select.error {
+    border-color: red; /* Resalta los campos con errores */
+    background-color: #fdd; /* Fondo claro cuando hay error */
 }
 
 form button {
@@ -46,8 +53,36 @@ form button:hover {
     background-color: #0056b3;
 }
 
+/* estilo para los errores*/
 .error {
     color: red;
     font-size: 12px;
     margin-top: 5px;
+}
+
+/* Ajustamos el tamaño del gráfico */
+.chart-container {
+    width: 100%;
+    max-width: 600px; /* Ajusta el máximo ancho del gráfico */
+    margin: 0 auto; /* Centra los gráficos */
+    padding: 20px; /* Añade algo de espacio alrededor de los gráficos */
+}
+
+.chart-container canvas {
+    width: 100% !important; /* Hace que el canvas se ajuste al contenedor */
+    height: auto !important; /* Mantiene las proporciones */
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/*  hacer el gráfico más responsivo en móviles */
+@media (max-width: 768px) {
+    .chart-container {
+        max-width: 100%; /* En pantallas pequeñas, el gráfico ocupará el 100% del contenedor */
+        padding: 10px; /* Menos espacio en pantallas pequeñas */
+        height: 300px; /* Puedes ajustar la altura también */
+    }
 }
