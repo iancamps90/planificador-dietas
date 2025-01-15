@@ -132,4 +132,18 @@ paso siguientes una vez hecho el formulario y nos envia por consola los datos pa
 
 4. añadimos estilos al app.css dandole estilo a los resultados proporcionados
 5. hacemos comit a git y creamos una nueva rama para nuevos desarollos de la pagina y no interferiri en lo creado
-6. 
+6. añadimos al calculo de calorias segun el objetivo del usuario si quiere perder peso mantener o ganar
+7. Vamos a realizar validaciones de los datos introducidos en el formulario :
+   - Validación en los campos:
+        Se asegura que el peso, la altura, y la edad sean números positivos y no vacíos.
+        Se validan los campos de género, actividad y objetivo para asegurarse de que el usuario los haya seleccionado.
+
+    - Manejo de errores:
+        Los mensajes de error se guardan en el estado errors y se muestran debajo de los campos correspondientes si los datos son incorrectos.
+
+    -Prevención de envío:
+        Si hay errores en el formulario, el cálculo no se realiza y se muestra el mensaje de error. Si no hay errores, se hace el cálculo y se envía el resultado al componente principal.
+
+    -Estilos de error:
+        Agregamos una clase de estilo llamada .error para resaltar los mensajes de error. Aquí puedes agregar un estilo para que los mensajes de error se vean más visibles.
+8. 
