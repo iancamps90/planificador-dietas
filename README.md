@@ -158,4 +158,7 @@ A continuación, modificamos tu código para incluir un gráfico circular que mu
 
 Vamos a agregar el gráfico dentro de tu formulario o donde quieras mostrarlo.
 10. se añaden estilos al grsfico 
-11. 
+11. Compilar y construir el proyecto:
+
+Para desplegarlo en GitHub Pages, debes asegurarte de compilar el proyecto usando Vite y luego desplegar los archivos resultantes npm run build, se crea la carpeta dist.
+
