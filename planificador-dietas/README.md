@@ -119,4 +119,17 @@ Ajuste según actividad física:
 Añadiremos la lógica al componente UserForm.
 Paso 1: Crear una función para calcular calorías
 Paso 2: Incluir el cálculo en el envío del formulario
-Paso 3: Añadir el selector de género
+Paso 3: Añadir el selector de género.
+
+
+paso siguientes una vez hecho el formulario y nos envia por consola los datos pasamos a guardarlos y los envie a la pagian .
+1. Usamos useState para almacenar los datos enviados desde el formulario (userData).
+2. La función handleUserData recibe los datos calculados y los guarda en el estado.
+3. Renderizar resultados:
+
+    Condicionalmente mostramos un bloque con los resultados si userData tiene información.
+    El formato de los datos es amigable para el usuario.
+
+4. añadimos estilos al app.css dandole estilo a los resultados proporcionados
+5. hacemos comit a git y creamos una nueva rama para nuevos desarollos de la pagina y no interferiri en lo creado
+6. 
