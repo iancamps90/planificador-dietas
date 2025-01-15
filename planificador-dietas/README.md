@@ -146,4 +146,16 @@ paso siguientes una vez hecho el formulario y nos envia por consola los datos pa
 
     -Estilos de error:
         Agregamos una clase de estilo llamada .error para resaltar los mensajes de error. Aquí puedes agregar un estilo para que los mensajes de error se vean más visibles.
-8. 
+8. instalamos charts Para representar un gráfico circular con la distribución de las calorías entre los macronutrientes (proteínas, carbohidratos y grasas)
+9. Importamos charts y añadimos ls graficos neecsarios 
+10. Crear el gráfico:
+
+A continuación, modificamos tu código para incluir un gráfico circular que muestre la distribución de las calorías entre proteínas, carbohidratos y grasas. Para calcular la distribución de las calorías, podemos usar los valores estándar de macronutrientes:
+
+    1 g de proteína = 4 calorías
+    1 g de carbohidrato = 4 calorías
+    1 g de grasa = 9 calorías
+
+Vamos a agregar el gráfico dentro de tu formulario o donde quieras mostrarlo.
+10. se añaden estilos al grsfico 
+11. 
