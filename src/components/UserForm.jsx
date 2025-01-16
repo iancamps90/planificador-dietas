@@ -1,6 +1,7 @@
 // src/components/UserForm.jsx
 
 import React, { useState } from "react"; // Importamos React y useState para manejar el estado del formulario
+import axios from 'axios'; // Importamos axios para hacer las llamadas a la API
 import "./UserForm.css"; // Importamos el archivo CSS específico para estilizar el formulario
 import axios from 'axios'; // Importamos axios para hacer las llamadas a la API
 import { Pie } from "react-chartjs-2"; // Importamos el componente Pie de Chart.js
