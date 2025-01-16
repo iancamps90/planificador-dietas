@@ -1,9 +1,11 @@
-// Importamos React y useState para manejar el estado del formulario
-import React, { useState } from "react";
-// Importamos el archivo CSS específico para estilizar el formulario
-import "./UserForm.css";
+// src/components/UserForm.jsx
+
+import React, { useState } from "react"; // Importamos React y useState para manejar el estado del formulario
+import "./UserForm.css"; // Importamos el archivo CSS específico para estilizar el formulario
 import { Pie } from "react-chartjs-2"; // Importamos el componente Pie de Chart.js
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
+import { calculateCalories, calculateMacronutrients, activityMultiplier } from "../utils/calculations";
+import FormField from './FormField';
 
 // Registramos los elementos necesarios para usar el gráfico circular
 ChartJS.register(ArcElement, Tooltip, Legend, Title);
@@ -37,63 +39,16 @@ const UserForm = ({ onSubmit }) => {
         setFormData({ ...formData, [name]: value });
     };
 
-
-    // Crear una función para calcular calorías
-    const calculateCalories = (weight, height, age, activityLevel, gender, goal) => {
-        // Cálculo del BMR según el género
-        const bmr =
-            gender === "male"
-                ? 10 * weight + 6.25 * height - 5 * age + 5  // Para hombres
-                : 10 * weight + 6.25 * height - 5 * age - 161; // Para mujeres
-
-        // Ajuste por nivel de actividad
-        const activityMultiplier = {
-            sedentario: 1.2,
-            activo: 1.55,
-            muyActivo: 1.725,
-        };
-
-        let totalCalories = bmr * activityMultiplier[activityLevel];
-
-        // Ajuste según el objetivo
-        if (goal === "lose") {
-            totalCalories *= 0.85; // Reducir un 15% para perder peso
-        } else if (goal === "gain") {
-            totalCalories *= 1.15; // Aumentar un 15% para ganar masa
-        }
-
-        return totalCalories;
-    };
-
-    // Funci0n calculo de los macronutrientes 
-    const calculateMacronutrients = (calories) => {
-        const proteinCalories = calories * 0.3; // 30% de las calorías para proteínas
-        const carbsCalories = calories * 0.4;   // 40% de las calorías para carbohidratos
-        const fatCalories = calories * 0.3;      // 30% de las calorías para grasas
-
-        // Convertimos las calorías a gramos
-        const proteinGrams = proteinCalories / 4; // 1g de proteína = 4 calorías
-        const carbsGrams = carbsCalories / 4;     // 1g de carbohidrato = 4 calorías
-        const fatGrams = fatCalories / 9;         // 1g de grasa = 9 calorías
-
-        return { proteinGrams, carbsGrams, fatGrams };
-    };
-
-
-
-
     const handleSubmit = (e) => {
         e.preventDefault();
         const { weight, height, age, activityLevel, gender, goal } = formData;
 
         // Validación de los campos
-        let formErrors = {};
-
+        const formErrors = {};
         // Validación de peso, altura y edad
         if (!weight || isNaN(weight) || weight <= 0) formErrors.weight = "Por favor, ingresa un peso válido.";
         if (!height || isNaN(height) || height <= 0) formErrors.height = "Por favor, ingresa una altura válida.";
         if (!age || isNaN(age) || age <= 0) formErrors.age = "Por favor, ingresa una edad válida.";
-
         // Validación de selección de género y nivel de actividad
         if (!gender) formErrors.gender = "Por favor, selecciona tu género.";
         if (!activityLevel) formErrors.activityLevel = "Por favor, selecciona tu nivel de actividad.";
@@ -144,122 +99,27 @@ const UserForm = ({ onSubmit }) => {
 
         <div>
             <form onSubmit={handleSubmit}>
-                {/* Título del formulario */}
                 <h2>Introduce tus datos</h2>
-
-                {/* Campo para el peso */}
-                <div>
-                    <label htmlFor="weight">Peso (kg):</label>
-                    <input
-                        type="number"         // El campo acepta solo números
-                        id="weight"           // Identificador único para el campo
-                        name="weight"         // Nombre del campo, coincide con la propiedad en el estado
-                        value={formData.weight} // Valor actual del estado correspondiente
-                        onChange={handleChange} // Manejador para capturar cambios
-                        required             // Campo obligatorio
-                    />
-                    {errors.weight && <p className="error">{errors.weight}</p>}
-                </div>
-
-                {/* Campo para la altura */}
-                <div>
-                    <label htmlFor="height">Altura (cm):</label>
-                    <input
-                        type="number"
-                        id="height"
-                        name="height"
-                        value={formData.height}
-                        onChange={handleChange}
-                        required
-                    />
-                    {errors.height && <p className="error">{errors.height}</p>}
-                </div>
-
-                {/* Campo para la edad */}
-                <div>
-                    <label htmlFor="age">Edad:</label>
-                    <input
-                        type="number"
-                        id="age"
-                        name="age"
-                        value={formData.age}
-                        onChange={handleChange}
-                        required
-                    />
-                    {errors.age && <p className="error">{errors.age}</p>}
-                </div>
-
-                {/* Campo para seleccionar genero */}
-                <div>
-                    <label htmlFor="gender">Género:</label>
-                    <select
-                            id="gender"
-                            name="gender"
-                            value={formData.gender}
-                            onChange={handleChange}
-                            required
-                        >
-                            <option value="">Selecciona tu género</option>
-                            <option value="male">Hombre</option>
-                            <option value="female">Mujer</option>
-                        </select>
-                    {errors.gender && <p className="error">{errors.gender}</p>}
-                </div>
-
-                {/* Campo para seleccionar el nivel de actividad */}
-                <div>
-                    <label htmlFor="activityLevel">Nivel de actividad:</label>
-                    <select
-                        id="activityLevel"
-                        name="activityLevel"
-                        value={formData.activityLevel}
-                        onChange={handleChange}
-                        required
-                    >
-                        {/* Opciones del selector */}
-                        <option value="">Selecciona tu nivel</option>
-                        <option value="sedentario">Sedentario</option>
-                        <option value="activo">Activo</option>
-                        <option value="muyActivo">Muy activo</option>
-                    </select>
-                    {errors.activityLevel && <p className="error">{errors.activityLevel}</p>}
-                </div>
-
-                {/* Campo para seleccionar el objetivo de la dieta */}
-                <div>
-                    <label htmlFor="goal">Objetivo:</label>
-                    <select
-                        id="goal"
-                        name="goal"
-                        value={formData.goal}
-                        onChange={handleChange}
-                    >
-                        {/* Opciones del selector */}
-                        <option value="">Selecciona tu objetivo</option>
-                        <option value="maintain">Mantener peso</option>
-                        <option value="lose">Perder peso</option>
-                        <option value="gain">Ganar masa muscular</option>
-                    </select>
-                    {errors.goal && <p className="error">{errors.goal}</p>}
-                </div>
-
-                {/* Botón para enviar el formulario */}
+                <FormField label="Peso (kg)" type="number" id="weight" name="weight" value={formData.weight} onChange={handleChange} error={errors.weight} />
+                <FormField label="Altura (cm)" type="number" id="height" name="height" value={formData.height} onChange={handleChange} error={errors.height} />
+                <FormField label="Edad" type="number" id="age" name="age" value={formData.age} onChange={handleChange} error={errors.age} />
+                <FormField label="Género" type="select" id="gender" name="gender" value={formData.gender} onChange={handleChange} error={errors.gender} options={["", "male", "female"]} />
+                <FormField label="Nivel de actividad" type="select" id="activityLevel" name="activityLevel" value={formData.activityLevel} onChange={handleChange} error={errors.activityLevel} options={["", "sedentario", "activo", "muyActivo"]} />
+                <FormField label="Objetivo" type="select" id="goal" name="goal" value={formData.goal} onChange={handleChange} error={errors.goal} options={["", "maintain", "lose", "gain"]} />
                 <button type="submit">Calcular dieta</button>
             </form>
 
-            {/* Si hay datos de calorías, mostramos el gráfico */}
             <div className="chart-container">
                 {caloriesData && (
                     <div>
                         <h3>Distribución de Calorías</h3>
-                        <Pie data={caloriesData} /> {/* Aquí renderizamos el gráfico circular */}
+                        <Pie data={caloriesData} />
                     </div>
                 )}
             </div>
-
-
-
         </div>
+
+
     );
 };
 
