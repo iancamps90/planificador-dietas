@@ -161,4 +161,8 @@ Vamos a agregar el gráfico dentro de tu formulario o donde quieras mostrarlo.
 11. Compilar y construir el proyecto:
 
 Para desplegarlo en GitHub Pages, debes asegurarte de compilar el proyecto usando Vite y luego desplegar los archivos resultantes npm run build, se crea la carpeta dist.
-
+12. se hace responsive el formulario y la pagina
+13. se va a organiza y optimizar el archivo userform
+14. vamos a crear formfiled para sacar la logica del return del formulario 
+15. se crea carpeta utils dond dentro pondremos archivo calculations para todos los calculos del formulario.
+16. 
