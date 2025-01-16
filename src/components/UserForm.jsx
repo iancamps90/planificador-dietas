@@ -1,6 +1,7 @@
 // src/components/UserForm.jsx
 
 import React, { useState } from "react"; // Importamos React y useState para manejar el estado del formulario
+import axios from 'axios'; // Importamos axios para hacer las llamadas a la API
 import "./UserForm.css"; // Importamos el archivo CSS específico para estilizar el formulario
 import { Pie } from "react-chartjs-2"; // Importamos el componente Pie de Chart.js
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from 'chart.js';
@@ -32,6 +33,8 @@ const UserForm = ({ onSubmit }) => {
         carbsGrams: 0,
         fatGrams: 0
     });
+    // Estado para almacenar la dieta
+    const [dietPlan, setDietPlan] = useState(null); 
 
 
     const handleChange = (e) => {
@@ -39,7 +42,7 @@ const UserForm = ({ onSubmit }) => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => { // Declaramos la función como async
         e.preventDefault();
         const { weight, height, age, activityLevel, gender, goal } = formData;
 
@@ -86,10 +89,28 @@ const UserForm = ({ onSubmit }) => {
             ],
         });
 
-        // Llamamos a la función onSubmit para enviar los datos al componente principal
+        // LLAMADA A LA API DE DIETA
+        try {
+            const response = await axios.get(`https://api.spoonacular.com/mealplanner/generate`, {
+                params: {
+                    apiKey: '86d08314673f46188d2212c310104fcd',
+                    targetCalories: dailyCalories,
+                    timeFrame: 'day'
+                }
+            });
+            setDietPlan(response.data);
+        } catch (error) {
+            if (error.response) {
+                console.error("Error fetching diet plan:", error.response.data);
+            } else {
+                console.error("Error fetching diet plan:", error.message);
+            }
+        }
+
         onSubmit({ ...formData, dailyCalories });
-        setErrors({}); // Limpiamos los errores al enviar el formulario
+        setErrors({});
     };
+
 
     
 
@@ -117,6 +138,23 @@ const UserForm = ({ onSubmit }) => {
                     </div>
                 )}
             </div>
+
+
+            <div className="diet-plan">
+                {dietPlan && (
+                    <div>
+                        <h3>Plan de Dieta</h3>
+                        {dietPlan.meals.map((meal, index) => (
+                            <div key={index}>
+                                <h4>{meal.title}</h4>
+                                <p>Calorías: {meal.calories}</p>
+                                <a href={meal.sourceUrl} target="_blank" rel="noopener noreferrer">Ver receta</a>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+
         </div>
 
 

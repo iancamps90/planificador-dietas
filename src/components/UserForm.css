@@ -96,3 +96,137 @@ h3 {
         height: 400px; /* Puedes ajustar la altura también */
     }
 }
+
+/* ESTILOS PARA EL DIET PLAN  */ 
+.diet-plan {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.diet-plan h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.diet-plan div {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.diet-plan div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.diet-plan h4 {
+    margin: 0;
+    color: #007bff;
+    font-size: 20px;
+}
+
+.diet-plan p {
+    margin: 10px 0 0;
+    color: #555;
+}
+
+.diet-plan a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-size: 14px;
+    text-align: center;
+}
+
+.diet-plan a:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Design */
+
+/* Para pantallas pequeñas (móviles) */
+@media (max-width: 480px) {
+    .diet-plan {
+        padding: 10px;
+        margin: 90px 30px 30px 30px;
+    }
+
+    .diet-plan h3 {
+        font-size: 20px;
+    }
+
+    .diet-plan div {
+        padding: 10px;
+    }
+
+    .diet-plan h4 {
+        font-size: 18px;
+    }
+
+    .diet-plan p {
+        font-size: 14px;
+    }
+
+    .diet-plan a {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+}
+
+/* Para pantallas medianas (tabletas) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .diet-plan {
+        max-width: 90%;
+    }
+
+    .diet-plan h3 {
+        font-size: 22px;
+    }
+
+    .diet-plan h4 {
+        font-size: 18px;
+    }
+
+    .diet-plan p {
+        font-size: 15px;
+    }
+}
+
+/* Para pantallas grandes (escritorios y más) */
+@media (min-width: 769px) {
+    .diet-plan {
+        max-width: 700px;
+    }
+
+    .diet-plan h3 {
+        font-size: 26px;
+    }
+
+    .diet-plan h4 {
+        font-size: 22px;
+    }
+
+    .diet-plan p {
+        font-size: 16px;
+    }
+
+    .diet-plan a {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
