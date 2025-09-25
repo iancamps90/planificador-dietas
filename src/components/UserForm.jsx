@@ -1,6 +1,6 @@
 // src/components/UserForm.jsx
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDiet } from "../context/DietContext";
 import "./UserForm.css";
 import { TextField, Button, MenuItem, Card, CardContent, Typography, Box, CircularProgress } from "@mui/material";
